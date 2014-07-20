@@ -21,8 +21,9 @@
 		window.twttr = window.twttr || {};
 
 		// Ready Facebook
-		$('body').append('<div id="fb-root"></div>');
-		$('head').append('<sc'+'ript src="https://connect.facebook.net/en_US/all.js"></sc'+'ript>');
+		$( 'body' ).append( '<div id="fb-root"></div>' );
+		$( 'head' ).append( '<sc' + 'ript src="//connect.facebook.net/en_US/all.js"></sc' + 'ript>' );
+		$( 'head' ).append( '<sc' + 'ript type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></sc' + 'ript>' );
 
 		this.each( function() {
 			var elem = $( this );
@@ -143,7 +144,7 @@
 						message : '',
 						name : options.title,
 						description : msg,
-						link : options.givingPageUrl,
+						link : options.url,
 						picture : img
 					};
 										
@@ -178,7 +179,7 @@
 				msg = encodeURIComponent( msg );
 
 				window.twttr.shareWin = window.open(
-					'https://twitter.com/share?url=' + options.givingPageUrl + '&text=' + msg,
+					'https://twitter.com/share?url=' + options.url + '&text=' + msg,
 					'', 'left=' + leftPos + ',top=' + topPos + ',width=' + popWidth + ',height=' + popHeight + ',personalbar=0,toolbar=0,scrollbars=1,resizable=1');
 
 				elem = document.createElement('script');
@@ -200,13 +201,13 @@
 					topPos = Math.round( ( winHeight / 2 ) - ( popHeight / 2 ) );
 				}
 
-				var url = 'http://www.linkedin.com/shareArticle?mini=true&url=' + options.givingPageUrl + '&title=&summary=' + msg;
+				var url = 'http://www.linkedin.com/shareArticle?mini=true&url=' + options.url + '&title=&summary=' + msg;
 
 				window.linkedin = window.linkedin || {};
 				window.linkedin.shareWin = window.open( url, '', 'left=' + leftPos + ',top=' + topPos + ',width=' + popWidth + ',height=' + popHeight + ',personalbar=0,toolbar=0,scrollbars=1,resizable=1');
 			}
 
-			function ShareGoogleplus ( msg, img ) {
+			function shareGoogleplus ( msg, img ) {
 				var popWidth = 550,
 					popHeight = 450,
 					winHeight = $(window).height(),
@@ -219,17 +220,31 @@
 					topPos = Math.round( ( winHeight / 2 ) - ( popHeight / 2 ) );
 				}
 
-				var url = 'https://plus.google.com/share?url=' + options.givingPageUrl;
+				var url = 'https://plus.google.com/share?url=' + options.url;
 				window.gplus = window.gplus || {};
 				window.gplus.shareWin = window.open( url, '', 'left=' + leftPos + ',top=' + topPos + ',width=' + popWidth + ',height=' + popHeight + ',personalbar=0,toolbar=0,scrollbars=1,resizable=1');
 			}
 
 			function sharePinterest ( msg, img ) {
+					var popWidth = 550,
+					popHeight = 450,
+					winHeight = $(window).height(),
+					winWidth = $(window).width(),
+					leftPos = Math.round( ( winWidth / 2 ) - ( popWidth / 2 ) ),
+					topPos = 0,
+					elem;
 
+				if ( winHeight > popHeight ) {
+					topPos = Math.round( ( winHeight / 2 ) - ( popHeight / 2 ) );
+				}
+
+				var url = '//www.pinterest.com/pin/create/button/?url=' + options.url;
+				window.pinterest = window.pinterest || {};
+				window.pinterest.shareWin = window.open( url, '', 'left=' + leftPos + ',top=' + topPos + ',width=' + popWidth + ',height=' + popHeight + ',personalbar=0,toolbar=0,scrollbars=1,resizable=1');
 			}
 
 			function shareEmail ( msg, img ) {
-				
+				window.location.href = "mailto:?body=options.url";
 			}
 
 		});

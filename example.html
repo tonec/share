@@ -17,12 +17,14 @@
 		
 		<h1>Share</h1>
 
+		<iframe id="shared-content" src="http://local.sites.com"></iframe>
+
 		<ul id="share_list">
 			<li><a href="#" rel="facebook">Facebook</a></li>
 			<li><a href="#" rel="twitter">Twitter</a></li>
 			<li><a href="#" rel="email">Email</a></li>
 			<li><a href="#" rel="linkedin">LinkedIn</a></li>
-			<li><a href="#" rel="google">Google +</a></li>
+			<li><a href="#" rel="googleplus">Google +</a></li>
 			<li><a href="#" rel="pinterest">Pinterest</a></li>
 		</ul>
 
@@ -34,7 +36,18 @@
 <script src="jquery.share.js"></script>
 
 <script>
-	$( '#share_list a' ).share();
+var shareUrl = $( '#shared-content' ).attr( 'src' );
+
+	$( '#share_list' ).share({
+		url: shareUrl,
+		title: '', 
+		fbAppId: '810992578924393',
+		linkElem: 'li a',
+		customContent: false,
+		sourceTxt: 'title',
+		sourceImg: '',
+		defaultImgUrl: ''
+	});
 </script>
 
 </body>
